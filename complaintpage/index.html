@@ -69,7 +69,7 @@
                     <img id="previewImage" src="/imagesfolder/form upload image.png" alt="Image Label" />
                 </label>
                 <input type="file" id="complaintImage" name="image" accept="image/*, video/*" class="d-none" onchange="previewFile()" />
-                <button type="button" onclick="submitComplaint()" class="btn submit">Submit</button>
+                <button type="button" id="submit_btn" onclick="submitComplaint()" class="btn submit">Submit</button>
             </div>
         </form>
     </div>
@@ -82,7 +82,7 @@
           </div>
           <div class="col-sm-6 right">
             <div>
-              <img src="./imagesfolder/logo.png" alt="logo"/>
+              <img src="../imagesfolder/logo.png" alt="logo"/>
               <span>YASUG</span>
             </div>
             <a href="mailto:yasugspeakup@gmail.com">yasugspeakup@gmail.com</a>
@@ -124,6 +124,7 @@
                     method: 'POST',
                     body: formData
                 });
+                document.getElementById("submit_btn").style.display = "none";
 
                 if (!response.ok) {
                     throw new Error('Failed to submit complaint');

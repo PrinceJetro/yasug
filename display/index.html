@@ -7,6 +7,7 @@
 <link rel="icon" href="https://media.cybernews.com/images/featured/2023/09/anonymous-hacker-mask.png" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta name="theme-color" content="#000000" />
+<link rel="stylesheet" href="../display.css">
 <meta
   name="description"
   content="Yasug Anonymous Complaint"
@@ -20,7 +21,7 @@
     <!-- Navbar Component will be placed here -->
     
     <h1 style="margin-top: 100px;">Complaint</h1>
-    <div id="complaintList">
+    <div id="complaintList" class="row">
         <!-- Dynamically generated complaint items will be placed here -->
     </div>
 </div>
@@ -54,14 +55,20 @@
         imageUrl = imageUrl.substring(1);
 
         complaintDiv.innerHTML = `
-            <div>
-                <h1>Category: ${complaint.categories}</h1>
-                <h1>${complaint.body}</h1>
-                <img src="${complaint.image_link}" alt="Complaint Image" style="width: 100%;" />
-                <p>if image didnt load, click on below link to be open the image</p>
-                <a href="${complaint.image_link}" target="_blank">Image link</a>
-            </div>
-        `;
+
+        <div class="column">
+    <div class="card">
+      <img src="${complaint.image_link}" alt="img" style="width:100%">
+      <div class="container">
+        <h2>Anonymous</h2>
+        <p class="title">${complaint.categories}</p>
+        <p>${complaint.body}.</p>
+      </div>
+    </div>
+  </div>
+
+  `;
+
         complaintList.appendChild(complaintDiv);
     });
 }
