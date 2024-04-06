@@ -59,7 +59,7 @@
                 <h1>${complaint.body}</h1>
                 <img src="${imageUrl}" alt="Complaint Image" style="width: auto;" />
                 <p>if image didnt load, clicl on below link to be open the image</p>
-                <a href="${imageUrl}" target="_blank">Image link</a>
+                <a href="${complaint.image_link}" target="_blank">Image link</a>
             </div>
         `;
         complaintList.appendChild(complaintDiv);
