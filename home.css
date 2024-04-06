@@ -57,7 +57,10 @@ body{
       font-weight: 400;
       line-height: 42.2px;
       text-align: center;
+    }
+    .soro-soke-div button a{
       color: #313637;
+      text-decoration: none;
     }
   }
   
@@ -101,7 +104,10 @@ body{
       font-weight: 400;
       line-height: 42.2px;
       text-align: center;
+    }
+    .soro-soke-div-mobile button a{
       color: #313637;
+      text-decoration: none;
     }
   }
   
