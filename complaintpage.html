@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complaint</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="complaint.css">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Angkor&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Mooli&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto+Slab:wght@100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="complaint">
+        <!-- Navbar Component will be placed here -->
+        <nav class="navbar navbar-expand-lg fixed-top navbar-light">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <a class="navbar-brand" style="color: #04623A;" href="#"><img src="/imagesfolder/logo.png" alt="logo"/> YASUG </a>
+          
+            <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+              <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                <li class="nav-item active">
+                  <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="complaintpage.html">Lodge a Complaint</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/contact">Contact</a>
+                </li>
+              </ul>
+             </div>
+          </nav>
+        <form id="complaintForm" method="post" enctype="multipart/form-data">
+            <h1 class="mt-5">Speak Up Anonymously (Soro Soke) new</h1>
+            <div>
+                <select id="category" name="category" required>
+                    <option value="categories">Category</option>
+                    <option value="harrassment">Harassment</option>
+                    <option value="academics">Academics</option>
+                    <option value="facilities">Facilities</option>
+                    <option value="safety">Safety</option>
+                    <option value="others">Others</option>
+                </select>
+                <textarea id="complaintDetails" name="complaint" required placeholder="Details of the complaint"></textarea>
+                <label for="complaintImage">
+                    <p class="m-3">Upload Evidence - Image/video (optional)</p>
+                    <img id="previewImage" src="/imagesfolder/form upload image.png" alt="Image Label" />
+                </label>
+                <input type="file" id="complaintImage" name="image" accept="image/*, video/*" class="d-none" onchange="previewFile()" />
+                <button type="button" onclick="submitComplaint()" class="btn submit">Submit</button>
+            </div>
+        </form>
+    </div>
+
+    <footer>
+        <div class="row div1">
+          <div class="col-sm-6 left">
+            <p>Report a Case Anonymously</p> <br/>
+            <p>Upload a photo/video evidence</p>
+          </div>
+          <div class="col-sm-6 right">
+            <div>
+              <img src="./imagesfolder/logo.png" alt="logo"/>
+              <span>YASUG</span>
+            </div>
+            <a href="mailto:yasugspeakup@gmail.com">yasugspeakup@gmail.com</a>
+          </div>
+        </div>
+        <div class="row div2">
+          <p>© 2024 — Copyright</p>
+          <div>
+            <i class="fa fa-whatsapp"></i>
+            <i class="fa fa-paper-plane"></i>
+            <span class="pipe">|</span>
+            <i class="fa fa-globe"></i>
+          </div>
+          <p>Privacy</p>
+        </div>
+      </footer>
+    <script>
+        function previewFile() {
+            const preview = document.getElementById('previewImage');
+            const fileInput = document.getElementById('complaintImage').files[0];
+            const reader = new FileReader();
+
+            reader.onloadend = function () {
+                preview.src = reader.result;
+            }
+
+            if (fileInput) {
+                reader.readAsDataURL(fileInput);
+            } else {
+                preview.src = "";
+            }
+        }
+
+        async function submitComplaint() {
+            const formData = new FormData(document.getElementById('complaintForm'));
+
+            try {
+                const response = await fetch('https://prince-jetro-chat-app.vercel.app/create', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                if (!response.ok) {
+                    throw new Error('Failed to submit complaint');
+                }
+
+                const data = await response.json();
+                console.log('Complaint created:', data);
+
+                // Redirect to the home page after successful submission
+                window.location.href = '/'; // Change the URL to your home page URL
+            } catch (error) {
+                console.error('Error submitting complaint:', error);
+                // Optionally, handle error scenarios
+            }
+        }
+    </script>
+</body>
+</html>
