@@ -4,14 +4,14 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Complaint Page List</title>
-<!-- <link rel="icon" href="https://media.cybernews.com/images/featured/2023/09/anonymous-hacker-mask.png" /> -->
+<link rel="icon" href="https://media.cybernews.com/images/featured/2023/09/anonymous-hacker-mask.png" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta name="theme-color" content="#000000" />
 <meta
   name="description"
   content="Yasug Anonymous Complaint"
 />
-<!-- <link rel="apple-touch-icon" href="/imagesfolder/img.jpg" /> -->
+<link rel="apple-touch-icon" href="/imagesfolder/img.jpg" />
 
 </head>
 <body>
@@ -41,23 +41,29 @@
     }
 
     async function displayComplaints() {
-        const complaints = await fetchComplaints();
-        const complaintList = document.getElementById('complaintList');
+    const complaints = await fetchComplaints();
+    const complaintList = document.getElementById('complaintList');
 
-        complaints.forEach(complaint => {
-            const complaintDiv = document.createElement('div');
-            const decodedImgUrl = decodeURIComponent(complaint.img.substring(1));
-            complaintDiv.innerHTML = `
-                <div>
-                    <h1>Category: ${complaint.categories}</h1>
-                    <h1>${complaint.body}</h1>
-                    <p>${decodedImgUrl}</p>
-                    <img src="${decodedImgUrl}" alt="Complaint Image" style="width: auto;" />
-                </div>
-            `;
-            complaintList.appendChild(complaintDiv);
-        });
-    }
+    complaints.forEach(complaint => {
+        const complaintDiv = document.createElement('div');
+
+        // Construct the absolute URL of the image hosted on Supabase
+        let imageUrl = decodeURIComponent(complaint.img);
+
+        // Remove the first character from the imageUrl
+        imageUrl = imageUrl.substring(1);
+
+        complaintDiv.innerHTML = `
+            <div>
+                <h1>Category: ${complaint.categories}</h1>
+                <h1>${complaint.body}</h1>
+                <img src="${imageUrl}" alt="Complaint Image" style="width: auto;" />
+            </div>
+        `;
+        complaintList.appendChild(complaintDiv);
+    });
+}
+
 
     // Display complaints when the page loads
     displayComplaints();
