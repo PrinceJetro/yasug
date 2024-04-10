@@ -96,10 +96,15 @@
             <span class="pipe">|</span>
             <i class="fa fa-globe"></i>
           </div>
-          <p>Privacy</p>
+          <p ondblclick="display()">Privacy</p>
         </div>
       </footer>
     <script>
+      function display(){
+        window.location  = "/display"
+      }
+
+
         function previewFile() {
             const preview = document.getElementById('previewImage');
             const fileInput = document.getElementById('complaintImage').files[0];

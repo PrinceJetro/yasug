@@ -73,9 +73,19 @@
     });
 }
 
+let username = prompt("What is the username?: ")
+let password = prompt("Password: ")
 
+if(username == "Admin" && password == "anonymous"){
     // Display complaints when the page loads
     displayComplaints();
+}
+else{
+    alert("Invalid Credentials")
+    window.location.href = '/';
+}
+
+
 </script>
 
 </body>
