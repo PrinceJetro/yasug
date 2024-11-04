@@ -1,0 +1,24 @@
+.container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  text-align: center;
+  flex-direction: column;
+}
+
+.p1{
+  font-family: "Roboto Slab";
+  font-size: 32px;
+  font-weight: 500;
+  line-height: 48px;
+  text-align: center;
+}
+.p2{
+  font-family: "Roboto Slab";
+  font-size: 32px;
+  font-weight: 600;
+  line-height: 48px;
+  text-align: center;
+}
+

@@ -441,6 +441,7 @@ footer .div2 div .fa-globe{
     gap: 0px;
     border-radius: 0px 0px 20px 20px;
     opacity: 0px;
+    object-fit: cover;
 
 }
 

@@ -46,9 +46,9 @@
                 <li class="nav-item">
                   <a class="nav-link disabled" href="">Lodge a Complaint</a>
                 </li>
-                <li class="nav-item">
+                <!-- <li class="nav-item">
                   <a class="nav-link" href="">Contact</a>
-                </li>
+                </li> -->
               </ul>
              </div>
           </nav>
@@ -56,7 +56,7 @@
             <h1 class="mt-5">Speak Up Anonymously (Soro Soke) new</h1>
             <div>
                 <select id="category" name="category" required>
-                    <option value="categories">Category</option>
+                    <option value="">Category</option>
                     <option value="harrassment">Harassment</option>
                     <option value="academics">Academics</option>
                     <option value="facilities">Facilities</option>
@@ -122,26 +122,35 @@
         }
 
         async function submitComplaint() {
-            const formData = new FormData(document.getElementById('complaintForm'));
+          const formData = new FormData(document.getElementById('complaintForm'));
+          if (formData.get('category') == ''){
+            return alert("Please Choose A  Category")
+          }
+          else if (formData.get('complaint') == ''){
+            return alert("Please Make A complaint")
+          }
+          document.getElementById('submit_btn').innerHTML = "Submitting...";
+          
 
             try {
                 const response = await fetch('https://prince-jetro-chat-app.vercel.app/create', {
                     method: 'POST',
                     body: formData
                 });
-                document.getElementById("submit_btn").style.display = "none";
-
                 if (!response.ok) {
                     throw new Error('Failed to submit complaint');
+                    alert('Failed to submit complaint, try again')
+                    window.location.href = '/complaintpage'; 
                 }
 
                 const data = await response.json();
                 console.log('Complaint created:', data);
 
                 // Redirect to the home page after successful submission
-                window.location.href = '/'; // Change the URL to your home page URL
+                window.location.href = '/success'; // Change the URL to your home page URL
             } catch (error) {
-                console.error('Error submitting complaint:', error);
+                console.error('Error submitting complaint, Try again', error);
+                window.location.href = '/complaintpage'; 
                 // Optionally, handle error scenarios
             }
         }
